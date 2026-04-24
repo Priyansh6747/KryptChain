@@ -7,6 +7,7 @@ import MetricsDashboard from "@/components/MetricsDashboard";
 import NodeActivityPanel from "@/components/NodeActivityPanel";
 import InteractivePanel from "@/components/InteractivePanel";
 import ScenarioPanel from "@/components/ScenarioPanel";
+import AttackInjector from "@/components/AttackInjector";
 import { Settings, Play, Square, FastForward, Gauge } from "lucide-react";
 
 const SPEEDS = [
@@ -190,6 +191,11 @@ export default function Dashboard() {
               nodes={state.nodes}
               hoveredBlockHash={hoveredBlockHash}
               tickCount={state.tickCount}
+            />
+            <AttackInjector
+              chainLength={state.nodes[0]?.chainLength || 0}
+              isRunning={state.isRunning}
+              onUpdate={fetchState}
             />
           </div>
         </div>
