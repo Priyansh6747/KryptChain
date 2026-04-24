@@ -1,20 +1,26 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Settings() {
   const router = useRouter();
+  const isFetching = useRef(false);
   const [state, setState] = useState(null);
   const [nodes, setNodes] = useState(5);
   const [consensus, setConsensus] = useState("pow");
   const [autoGenerateTxs, setAutoGenerateTxs] = useState(true);
 
   const fetchState = async () => {
+    if (isFetching.current) return;
+    isFetching.current = true;
     try {
       const res = await fetch("/api/sim/state");
       const data = await res.json();
       setState(data);
-    } catch(e) {}
+    } catch(e) {
+    } finally {
+      isFetching.current = false;
+    }
   };
 
   useEffect(() => {

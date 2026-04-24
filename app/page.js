@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { normalizeGraphData } from "@/lib/ui/stateNormalizer";
 import BlockchainGraph from "@/components/BlockchainGraph";
@@ -21,6 +21,7 @@ const SPEEDS = [
 
 export default function Dashboard() {
   const router = useRouter();
+  const isFetching = useRef(false);
   const [state,            setState           ] = useState(null);
   const [graphData,        setGraphData       ] = useState({ blocks: [], edges: [] });
   const [leftTab,          setLeftTab         ] = useState("nodes");
@@ -28,13 +29,18 @@ export default function Dashboard() {
   const [speedIdx,         setSpeedIdx        ] = useState(1); // default 1×
 
   const fetchState = async () => {
+    if (isFetching.current) return;
+    isFetching.current = true;
     try {
       const res  = await fetch("/api/sim/state");
       const data = await res.json();
       setState(data);
       const { blocks, edges } = normalizeGraphData(data);
       setGraphData({ blocks, edges });
-    } catch(e) {}
+    } catch(e) {
+    } finally {
+      isFetching.current = false;
+    }
   };
 
   useEffect(() => {
