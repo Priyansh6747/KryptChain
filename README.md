@@ -6,16 +6,16 @@ Unlike traditional deterministic simulators that assume perfect network conditio
 
 ## Core Features
 
-*   **Scenario Engine:** Deterministically replay iconic distributed systems failures via heavily curated scripts:
-    *   **51% Attacks:** Watch a majority hash-power node rewrite history and trigger massive network-wide reorganizations.
-    *   **Selfish Mining:** Observe miners intentionally withholding blocks to waste honest network hash power.
-    *   **Network Partitions (Split-Brain):** Simulate a routing failure that splits the network in half. Watch both sides mine independently, then witness the chaotic reorg when the partition heals.
-    *   **Double Spend Attacks:** See the probabilistic nature of confirmations fail against an attacker with private chains.
-    *   **High Latency & Byzantine Floods:** Test finality and resilience under extreme network degradation and malicious block spam.
-*   **Real-Time Visual DAG Projection:** A custom Canvas/SVG renderer that plots the live blockchain state, dynamically rendering canonical chains, forks, and orphan blocks, and flagging malicious actors with UI markers.
+*   **Live Attack Injector:** Inject devastating attacks into a *live, running network* without resetting the simulation. 
+    *   **Double Spend Attacks:** Driven by the actual **Nakamoto 2008 Poisson distribution formula**. Watch the mathematical probability of success shift in real-time as the honest network adds confirmations vs the attacker's hash power.
+    *   **Selfish Mining:** Inject a selfish miner and watch the live delta-orphan-rate. The engine mathematically enforces the >33% profitability threshold for selfish mining to succeed.
+    *   **Byzantine Floods & Network Partitions:** Sever the network in half and watch the resulting chaotic reorg when the partition heals, or flood the network with invalid blocks to test consensus rejection.
+*   **Live Attack Monitor:** A clean, professional UI panel that slides in during an active attack to provide real-time telemetry: chain depth differentials, reorg counts, and a live updating success probability gauge.
+*   **Scenario Engine:** Deterministically replay iconic distributed systems failures via heavily curated scripts, like 51% attacks and high-latency stress tests.
+*   **Real-Time Visual DAG Projection:** A custom Canvas/SVG renderer that plots the live blockchain state, dynamically rendering canonical chains, forks, and orphan blocks. It visually attributes blocks to their miners and uses color-coded paths to trace adversarial behavior.
 *   **Fully Modeled Ledger:** Every node tracks real balances. Transactions are validated (no self-transfers, no negative amounts), miners receive block rewards (50 KRYPT), and the ledger safely rebuilds itself from genesis during deep chain reorganizations to guarantee state integrity.
 *   **Comprehensive Telemetry:** Track Transactions Per Second (TPS), network congestion (pending messages), rolling average propagation latency, and the **Consensus Ratio** (the fraction of the network agreeing on the same chain tip).
-*   **Interactive Simulation Control:** Pause, step tick-by-tick, inject custom transactions, or alter simulation speeds (1x to 10x) on the fly.
+*   **Interactive Simulation Control:** Pause, step tick-by-tick, inject custom transactions, or alter simulation speeds (0.5x to 10x) on the fly.
 
 ## Getting Started
 
