@@ -279,5 +279,6 @@ export default function BlockchainGraph({ blocks, edges, hoveredBlockHash, tickC
         </g>
       </svg>
     </div>
+    </div>
   );
 }
