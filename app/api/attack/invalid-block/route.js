@@ -1,5 +1,5 @@
-import { getSimulation } from '../../../../../lib/engine/global.js';
-import { Block } from '../../../../../lib/engine/types.js';
+import { getSimulation } from '@/lib/engine/global.js';
+import { Block } from '@/lib/engine/types.js';
 
 export async function POST(req) {
   const sim = getSimulation();

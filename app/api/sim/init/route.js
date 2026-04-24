@@ -1,4 +1,4 @@
-import { setSimulation } from '../../../../lib/engine/global.js';
+import { setSimulation } from '@/lib/engine/global.js';
 
 export async function POST(req) {
   const body = await req.json();

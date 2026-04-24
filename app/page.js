@@ -6,11 +6,13 @@ import BlockchainGraph from "@/components/BlockchainGraph";
 import MetricsDashboard from "@/components/MetricsDashboard";
 import NodeActivityPanel from "@/components/NodeActivityPanel";
 import InteractivePanel from "@/components/InteractivePanel";
+import ScenarioPanel from "@/components/ScenarioPanel";
 import { Settings, Play, Square, FastForward } from "lucide-react";
 
 export default function Dashboard() {
   const [state, setState] = useState(null);
   const [graphData, setGraphData] = useState({ blocks: [], edges: [] });
+  const [leftTab, setLeftTab] = useState("nodes"); // "nodes" | "scenarios"
 
   const fetchState = async () => {
     try {
@@ -85,9 +87,20 @@ export default function Dashboard() {
 
       {/* Main Layout */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Left Panel: Node Activity */}
-        <div className="w-64 border-r border-gray-800 p-4 shrink-0 overflow-hidden hidden md:block">
-           <NodeActivityPanel nodes={state.nodes} consensusType={state.consensusType} />
+        {/* Left Panel */}
+        <div className="w-72 border-r border-gray-800 p-4 shrink-0 overflow-hidden hidden md:flex flex-col bg-gray-950 z-10">
+           <div className="flex space-x-2 mb-4 shrink-0 bg-gray-900 p-1 rounded-lg border border-gray-800">
+             <button onClick={() => setLeftTab("nodes")} className={`flex-1 text-xs py-1.5 rounded transition-colors ${leftTab === 'nodes' ? 'bg-gray-800 text-white shadow' : 'text-gray-500 hover:text-gray-300'}`}>Nodes</button>
+             <button onClick={() => setLeftTab("scenarios")} className={`flex-1 text-xs py-1.5 rounded transition-colors ${leftTab === 'scenarios' ? 'bg-gray-800 text-white shadow' : 'text-gray-500 hover:text-gray-300'}`}>Scenarios</button>
+           </div>
+           
+           <div className="flex-1 min-h-0 overflow-hidden">
+             {leftTab === "nodes" ? (
+               <NodeActivityPanel nodes={state.nodes} consensusType={state.consensusType} />
+             ) : (
+               <ScenarioPanel currentState={state} fetchState={fetchState} />
+             )}
+           </div>
         </div>
 
         {/* Center: Graph */}

@@ -1,4 +1,4 @@
-import { getSimulation } from '../../../../lib/engine/global.js';
+import { getSimulation } from '@/lib/engine/global.js';
 
 export async function POST(req) {
   const sim = getSimulation();
