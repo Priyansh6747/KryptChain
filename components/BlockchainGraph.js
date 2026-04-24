@@ -155,12 +155,9 @@ export default function BlockchainGraph({ blocks, edges, hoveredBlockHash, tickC
   }, [tickCount]);
 
   return (
-    <div
-      className="w-full h-full overflow-x-auto overflow-y-auto custom-scrollbar bg-gray-950 rounded-xl border border-gray-800 relative shadow-inner"
-      ref={containerRef}
-    >
+    <div className="relative w-full h-full">
       {/* Legend */}
-      <div className="absolute top-3 right-3 z-10 flex flex-col gap-1 bg-gray-900/80 backdrop-blur-sm rounded-lg border border-gray-800 px-3 py-2 pointer-events-none">
+      <div className="absolute top-3 right-6 z-10 flex flex-col gap-1 bg-gray-900/80 backdrop-blur-sm rounded-lg border border-gray-800 px-3 py-2 pointer-events-none">
         {legend.map(l => (
           <div key={l.label} className="flex items-center gap-2 text-[10px] text-gray-400">
             <span className="w-3 h-3 rounded-sm shrink-0" style={{ background: l.color }} />
@@ -169,8 +166,12 @@ export default function BlockchainGraph({ blocks, edges, hoveredBlockHash, tickC
         ))}
       </div>
 
-      <svg width={width} height={height} className="min-h-full overflow-visible">
-        <defs>
+      <div
+        className="w-full h-full overflow-x-auto overflow-y-auto custom-scrollbar bg-gray-950 rounded-xl border border-gray-800 relative shadow-inner"
+        ref={containerRef}
+      >
+        <svg width={width} height={height} className="min-h-full overflow-visible">
+          <defs>
           {[
             { id:"arr-gray",  fill:"#374151" },
             { id:"arr-green", fill:"#10b981" },

@@ -35,3 +35,17 @@ body {
     background: #374151; 
   }
 }
+
+/* ── Subtle attack animations ───────────────────────────── */
+
+@keyframes slide-down {
+  from { transform: translateY(-8px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes outcome-scale-in {
+  from { transform: translateY(12px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.slide-down  { animation: slide-down 0.2s ease-out forwards; }
+.outcome-in  { animation: outcome-scale-in 0.25s ease-out forwards; }

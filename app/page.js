@@ -8,6 +8,7 @@ import NodeActivityPanel from "@/components/NodeActivityPanel";
 import InteractivePanel from "@/components/InteractivePanel";
 import ScenarioPanel from "@/components/ScenarioPanel";
 import AttackInjector from "@/components/AttackInjector";
+import AttackBattle from "@/components/AttackBattle";
 import { Settings, Play, Square, FastForward, Gauge } from "lucide-react";
 
 const SPEEDS = [
@@ -182,7 +183,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Center: Graph */}
+        {/* Center: Graph — becomes the battle arena during attacks */}
         <div className="flex-1 relative flex flex-col h-full overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900/50 via-gray-950 to-gray-950">
           <div className="flex-1 min-h-0 w-full relative z-0 overflow-hidden">
             <BlockchainGraph
@@ -192,6 +193,16 @@ export default function Dashboard() {
               hoveredBlockHash={hoveredBlockHash}
               tickCount={state.tickCount}
             />
+            {/* Cinematic attack overlay — lives inside graph so it can cover it */}
+            <AttackBattle
+              attackStatus={state.attackStatus}
+              nodes={state.nodes}
+              onClear={async () => {
+                await fetch('/api/attack/clear', { method: 'POST' });
+                fetchState();
+              }}
+            />
+            {/* Attack injector floating button */}
             <AttackInjector
               chainLength={state.nodes[0]?.chainLength || 0}
               isRunning={state.isRunning}
