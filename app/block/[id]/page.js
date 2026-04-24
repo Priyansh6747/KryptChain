@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState, use } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function BlockInspector({ params }) {
+  const router = useRouter();
   const [block, setBlock] = useState(null);
   const [error, setError] = useState("");
   // Unwrap params using React.use for Next.js 15+ compatibility
@@ -35,9 +36,9 @@ export default function BlockInspector({ params }) {
       <div className="max-w-3xl mx-auto space-y-6">
         <div className="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
           <h1 className="text-2xl font-bold text-gray-100">Block #{block.index}</h1>
-          <Link href="/" className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md transition-colors text-sm font-medium">
+          <button onClick={() => router.push('/')} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md transition-colors text-sm font-medium">
             Back to Dashboard
-          </Link>
+          </button>
         </div>
 
         <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 shadow-xl space-y-4">

@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import anime from "animejs";
-import Link from "next/link";
-
+import { useRouter } from "next/navigation";
 const X_SPACING = 120;
 const Y_SPACING = 80;
 const ANNOTATION_LIFETIME_TICKS = 8;
@@ -29,6 +28,7 @@ const legend = [
 ];
 
 export default function BlockchainGraph({ blocks, edges, hoveredBlockHash, tickCount }) {
+  const router = useRouter();
   const containerRef = useRef(null);
   const seenBlocks   = useRef(new Set());
   const seenEdges    = useRef(new Set());
@@ -220,8 +220,7 @@ export default function BlockchainGraph({ blocks, edges, hoveredBlockHash, tickC
             const s        = blockStyle(block);
             const badge    = blockBadge(block);
             return (
-              <Link href={`/block/${block.hash}`} key={block.hash}>
-                <g id={`block-${block.hash}`} className="cursor-pointer" style={{ filter: s.glow }}>
+                <g id={`block-${block.hash}`} key={block.hash} className="cursor-pointer" style={{ filter: s.glow }} onClick={() => router.push(`/block/${block.hash}`)}>
                   {/* Outer halo */}
                   <rect x={x-23} y={y-23} width={46} height={46} rx={11}
                     fill="transparent" stroke={s.stroke} strokeWidth={1} opacity={0.15} />
@@ -246,7 +245,6 @@ export default function BlockchainGraph({ blocks, edges, hoveredBlockHash, tickC
                       className="pointer-events-none select-none">{badge.text}</text>
                   )}
                 </g>
-              </Link>
             );
           })}
         </g>

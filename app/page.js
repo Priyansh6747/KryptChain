@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from 'next/link';
+import { useRouter } from "next/navigation";
 import { normalizeGraphData } from "@/lib/ui/stateNormalizer";
 import BlockchainGraph from "@/components/BlockchainGraph";
 import MetricsDashboard from "@/components/MetricsDashboard";
@@ -20,6 +20,7 @@ const SPEEDS = [
 ];
 
 export default function Dashboard() {
+  const router = useRouter();
   const [state,            setState           ] = useState(null);
   const [graphData,        setGraphData       ] = useState({ blocks: [], edges: [] });
   const [leftTab,          setLeftTab         ] = useState("nodes");
@@ -147,9 +148,9 @@ export default function Dashboard() {
             className="p-2 rounded hover:bg-gray-800 text-blue-400 transition-colors border-l border-gray-800 pl-3 ml-1" title="Step">
             <FastForward size={16} />
           </button>
-          <Link href="/settings" className="p-2 rounded hover:bg-gray-800 text-gray-500 transition-colors ml-1">
+          <button onClick={() => router.push('/settings')} className="p-2 rounded hover:bg-gray-800 text-gray-500 transition-colors ml-1">
             <Settings size={16} />
-          </Link>
+          </button>
         </div>
       </header>
 

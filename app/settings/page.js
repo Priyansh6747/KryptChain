@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from 'next/link';
+import { useRouter } from "next/navigation";
 
 export default function Settings() {
+  const router = useRouter();
   const [state, setState] = useState(null);
   const [nodes, setNodes] = useState(5);
   const [consensus, setConsensus] = useState("pow");
@@ -45,9 +46,9 @@ export default function Settings() {
       <div className="max-w-2xl mx-auto space-y-8">
         <div className="flex justify-between items-center border-b border-gray-800 pb-4">
           <h1 className="text-3xl font-bold tracking-tight text-white">Settings & Control</h1>
-          <Link href="/" className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-sm transition-colors">
+          <button onClick={() => router.push('/')} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-sm transition-colors">
             Back to Dashboard
-          </Link>
+          </button>
         </div>
 
         <div className="bg-gray-900 p-6 rounded-xl border border-gray-800 shadow-xl">
